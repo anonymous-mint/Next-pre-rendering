@@ -1,7 +1,9 @@
+import { useRouter } from "next/router";
 import React from "react";
 
-const post = ({ post }) => {
-  console.log(post);
+const Post = ({ post }) => {
+  const router = useRouter();
+  if (router.isFallback) return <h1>Loading...</h1>;
   return (
     <div>
       <h1>{post.title}</h1>
@@ -10,7 +12,7 @@ const post = ({ post }) => {
   );
 };
 
-export default post;
+export default Post;
 
 export const getStaticPaths = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -22,33 +24,14 @@ export const getStaticPaths = async () => {
       },
     };
   });
-  console.log(paths);
   return {
     paths,
-    // paths: [
-    //   {
-    //     params: { postId: "1" },
-    //   },
-    //   {
-    //     params: { postId: "2" },
-    //   },
-    //   {
-    //     params: { postId: "3" },
-    //   },
-    //   {
-    //     params: { postId: "4" },
-    //   },
-    //   {
-    //     params: { postId: "5" },
-    //   },
-    // ],
-    fallback: false,
+    fallback: true,
   };
 };
 
 export const getStaticProps = async (context) => {
   const { params } = context;
-  console.log(params, "------", context);
   const response = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${params.postId}`
   );
