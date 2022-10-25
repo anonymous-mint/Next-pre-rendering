@@ -1,4 +1,9 @@
 {
+  "dashboard": {
+    "name": "Dev",
+    "likes": "69",
+    "followers": "150"
+  },
   "News": [
     {
       "id": 1,
