@@ -26,8 +26,5 @@ export const getServerSideProps = async (context) => {
   );
   const data = await response.json();
 
-  console.log(data);
-
-  console.log("regenerated");
   return { props: { articles: data } };
 };
